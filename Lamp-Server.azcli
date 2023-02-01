@@ -1,0 +1,4 @@
+az group create --name LAMP --location westeurope
+az vm create --name MyUbuntuLampSRV --size Standard_B1ls --resource-group LAMP --image UbuntuLTS --location westeurope --admin-username  superuser --generate-ssh-keys
+az vm run-command invoke -g LAMP -n MyUbuntuLampSRV --command-id RunShellScript --scripts "sudo apt-get update && sudo apt-get install -y apache2 libapache2-mod-php php php-mysql mysql-server"
+az vm open-port --port 80 -g LAMP -n MyUbuntuLampSRV
